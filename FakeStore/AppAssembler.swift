@@ -29,4 +29,10 @@ struct AppAssembler {
 		
 		return view
 	}
+	
+	static func makeCartView(cartManager: CartManager) -> CartView {
+		let view = CartView()
+		
+		return view
+	}
 }

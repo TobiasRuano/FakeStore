@@ -11,15 +11,14 @@ struct HomeView: View {
 	
 	@EnvironmentObject var cartManager: CartManager
 	@StateObject var viewModel: HomeViewModel
-	
-	@State var path = NavigationPath()
+	@StateObject var coordinator = AppCoordinator()
 	
 	init(cartManager: CartManager, viewModel: HomeViewModel) {
 		_viewModel = StateObject(wrappedValue: viewModel)
 	}
 	
     var body: some View {
-		NavigationStack(path: $path) {
+		NavigationStack(path: $coordinator.path) {
 			ScrollView {
 				if self.viewModel.displayStyle == .grid {
 					let columns = [GridItem(.flexible()), GridItem(.flexible())]
@@ -28,7 +27,7 @@ struct HomeView: View {
 						ForEach(viewModel.products, id: \.id) { product in
 							ProductCellVerticalView(product: product)
 								.onTapGesture {
-									self.path.append(product)
+									coordinator.push(route: .productDetail(product: product))
 								}
 						}
 					}
@@ -37,7 +36,7 @@ struct HomeView: View {
 						ForEach(viewModel.products, id: \.id) { product in
 							ProductCellView(product: product)
 								.onTapGesture {
-									self.path.append(product)
+									coordinator.push(route: .productDetail(product: product))
 								}
 						}
 					}
@@ -55,13 +54,13 @@ struct HomeView: View {
 				ToolbarItem(placement: .topBarTrailing) {
 					ZStack(alignment: .topTrailing) {
 						Button(action: {
-							self.path.append(cartManager.products)
+							coordinator.push(route: .cart)
 						}) {
 							Image(systemName: "cart")
 								.font(.title2)
 						}
 						
-						if true { // reemplazá por la lógica real
+						if cartManager.count > 0 {
 							Text("\(viewModel.getCartCount())")
 								.font(.caption)
 								.foregroundColor(.white)
@@ -74,12 +73,8 @@ struct HomeView: View {
 				}
 			}
 			.navigationTitle("Products")
-			.navigationDestination(for: Product.self) { product in
-				AppAssembler.makeProductDetailView(product: product, cartManager: cartManager)
-			}
-			.navigationDestination(for: Products.self) { _ in
-				CartView()
-					.environmentObject(cartManager)
+			.navigationDestination(for: AppRoute.self) { route in
+				AnyView(coordinator.buildView(for: route, with: cartManager))
 			}
 		}
 	}
