@@ -12,7 +12,10 @@ class ProductDetailViewModel: ObservableObject {
 	let cartManager: CartManager
 	let product: Product
 	
-	init(product: Product, cartManager: CartManager) {
+	init(
+		product: Product,
+		cartManager: CartManager
+	) {
 		self.product = product
 		self.cartManager = cartManager
 	}

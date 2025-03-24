@@ -36,4 +36,5 @@ struct CartView: View {
 
 #Preview {
     CartView()
+		.environmentObject(CartManager())
 }

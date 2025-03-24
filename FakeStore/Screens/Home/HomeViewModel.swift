@@ -19,7 +19,10 @@ class HomeViewModel: ObservableObject {
 	@Published var displayStyle: DisplayStyle = .list
 	let useCase: GetProductUseCase
 	
-	init(cartManager: CartManager, useCase: GetProductUseCase) {
+	init(
+		cartManager: CartManager,
+		useCase: GetProductUseCase
+	) {
 		self.cartManager = cartManager
 		self.useCase = useCase
 		getProducts()

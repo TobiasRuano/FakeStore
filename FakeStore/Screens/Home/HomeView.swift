@@ -74,7 +74,7 @@ struct HomeView: View {
 			}
 			.navigationTitle("Products")
 			.navigationDestination(for: AppRoute.self) { route in
-				AnyView(coordinator.buildView(for: route, with: cartManager))
+				coordinator.buildView(for: route, with: cartManager)
 			}
 		}
 	}

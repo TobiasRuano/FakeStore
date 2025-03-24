@@ -11,7 +11,6 @@ protocol Coordinator: ObservableObject {
 	func push(route: AppRoute)
 	func pop()
 	func popToRoot()
-	func buildView(for route: AppRoute, with cart: CartManager) -> any View
 }
 
 class AppCoordinator: Coordinator {
@@ -26,17 +25,22 @@ class AppCoordinator: Coordinator {
 	}
 	
 	func popToRoot() {
-		path.removeLast(path.count - 1)
+		if !path.isEmpty {
+			path.removeLast(path.count)
+		}
 	}
 	
-	func buildView(for route: AppRoute, with cart: CartManager) -> any View {
+	func buildView(
+		for route: AppRoute,
+		with cart: CartManager
+	) -> AnyView {
 		switch route {
 		case .home:
-			AppAssembler.makeHomeView(cartManager: cart)
+			AnyView(AppAssembler.makeHomeView(cartManager: cart))
 		case .productDetail(let product):
-			AppAssembler.makeProductDetailView(product: product, cartManager: cart)
+			AnyView(AppAssembler.makeProductDetailView(product: product, cartManager: cart))
 		case .cart:
-			AppAssembler.makeCartView(cartManager: cart)
+			AnyView(AppAssembler.makeCartView(cartManager: cart))
 		}
 	}
 }

@@ -8,7 +8,9 @@
 import Foundation
 
 struct AppAssembler {
-	static func makeHomeView(cartManager: CartManager) -> HomeView {
+	static func makeHomeView(
+		cartManager: CartManager
+	) -> HomeView {
 		let networkManager = NetworkManager()
 		let dataSource = NetworkAPI(networkManager: networkManager)
 		let repo = FakeStoreRepositoryImp(dataSource: dataSource)
@@ -23,14 +25,19 @@ struct AppAssembler {
 		return homeView
 	}
 	
-	static func makeProductDetailView(product: Product, cartManager: CartManager) -> ProductDetailView {
+	static func makeProductDetailView(
+		product: Product,
+		cartManager: CartManager
+	) -> ProductDetailView {
 		let viewModel = ProductDetailViewModel(product: product, cartManager: cartManager)
 		let view = ProductDetailView(viewModel: viewModel)
 		
 		return view
 	}
 	
-	static func makeCartView(cartManager: CartManager) -> CartView {
+	static func makeCartView(
+		cartManager: CartManager
+	) -> CartView {
 		let view = CartView()
 		
 		return view
