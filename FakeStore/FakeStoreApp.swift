@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct FakeStoreApp: App {
+	
+	@StateObject var cartManager = CartManager()
+	
     var body: some Scene {
         WindowGroup {
-            ContentView()
+			AppAssembler.makeHomeView(cartManager: cartManager)
+				.environmentObject(cartManager)
         }
     }
 }
