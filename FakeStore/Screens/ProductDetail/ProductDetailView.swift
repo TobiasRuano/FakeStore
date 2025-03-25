@@ -60,13 +60,25 @@ struct ProductDetailView: View {
 				.padding([.leading, .trailing], 16)
 				
 				Button {
-					self.viewModel.addToCart()
+					if viewModel.isProductOnCart() {
+						self.viewModel.removeFromCart()
+					} else {
+						self.viewModel.addToCart()
+					}
 				} label: {
-					Text("Add to Cart")
-						.foregroundStyle(.white)
-						.frame(maxWidth: .infinity)
-						.padding()
-						.background(RoundedRectangle(cornerRadius: 10))
+					if viewModel.isProductOnCart() {
+						Label("Remove from Cart", systemImage: "cart")
+							.foregroundStyle(.white)
+							.frame(maxWidth: .infinity)
+							.padding()
+							.background(RoundedRectangle(cornerRadius: 10).fill(.red))
+					} else {
+						Label("Add to Cart", systemImage: "cart.fill")
+							.foregroundStyle(.white)
+							.frame(maxWidth: .infinity)
+							.padding()
+							.background(RoundedRectangle(cornerRadius: 10))
+					}
 				}
 				.padding()
 			}

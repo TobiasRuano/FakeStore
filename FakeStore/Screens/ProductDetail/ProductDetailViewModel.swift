@@ -20,8 +20,15 @@ class ProductDetailViewModel: ObservableObject {
 		self.cartManager = cartManager
 	}
 	
+	func isProductOnCart() -> Bool {
+		cartManager.products.contains(product)
+	}
+	
 	func addToCart() {
 		cartManager.add(product)
-		print("Product added to cart: \(product.title)")
+	}
+	
+	func removeFromCart() {
+		cartManager.remove(product)
 	}
 }
