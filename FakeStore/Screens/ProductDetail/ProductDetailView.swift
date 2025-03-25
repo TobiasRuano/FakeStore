@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ProductDetailView: View {
 	
+	@EnvironmentObject var coordinator: AppCoordinator
 	@ObservedObject private var viewModel: ProductDetailViewModel
 	
 	init(viewModel: ProductDetailViewModel) {
@@ -83,6 +84,13 @@ struct ProductDetailView: View {
 				.padding()
 			}
 		}
+		.toolbar {
+			ToolbarItem(placement: .topBarTrailing) {
+				CartToolbarButtonView(cartCount: viewModel.cartManager.count) {
+					coordinator.push(route: .cart)
+				}
+			}
+		}
     }
 }
 
@@ -105,4 +113,5 @@ struct ProductDetailView: View {
 		)
 	)
 	.environmentObject(CartManager())
+	.environmentObject(AppCoordinator())
 }

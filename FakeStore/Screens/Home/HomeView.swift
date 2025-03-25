@@ -52,23 +52,8 @@ struct HomeView: View {
 					}
 				}
 				ToolbarItem(placement: .topBarTrailing) {
-					ZStack(alignment: .topTrailing) {
-						Button(action: {
-							coordinator.push(route: .cart)
-						}) {
-							Image(systemName: "cart")
-								.font(.title2)
-						}
-						
-						if cartManager.count > 0 {
-							Text("\(viewModel.getCartCount())")
-								.font(.caption)
-								.foregroundColor(.white)
-								.padding(6)
-								.background(Color.blue)
-								.clipShape(Circle())
-								.offset(x: 8, y: -8)
-						}
+					CartToolbarButtonView(cartCount: viewModel.getCartCount()) {
+						coordinator.push(route: .cart)
 					}
 				}
 			}

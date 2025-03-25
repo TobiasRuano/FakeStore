@@ -36,9 +36,9 @@ class AppCoordinator: Coordinator {
 	) -> AnyView {
 		switch route {
 		case .home:
-			AnyView(ViewFactory.makeHomeView(cartManager: cart))
+			AnyView(ViewFactory.makeHomeView(cartManager: cart).environmentObject(self))
 		case .productDetail(let product):
-			AnyView(ViewFactory.makeProductDetailView(product: product, cartManager: cart))
+			AnyView(ViewFactory.makeProductDetailView(product: product, cartManager: cart).environmentObject(self))
 		case .cart:
 			AnyView(ViewFactory.makeCartView(cartManager: cart))
 		}
