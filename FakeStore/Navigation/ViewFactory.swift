@@ -1,5 +1,5 @@
 //
-//  AppAssembler.swift
+//  ViewFactory.swift
 //  FakeStore
 //
 //  Created by Tobias Ruano on 24/03/2025.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AppAssembler {
+struct ViewFactory {
 	static func makeHomeView(
 		cartManager: CartManager
 	) -> HomeView {

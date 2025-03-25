@@ -36,11 +36,11 @@ class AppCoordinator: Coordinator {
 	) -> AnyView {
 		switch route {
 		case .home:
-			AnyView(AppAssembler.makeHomeView(cartManager: cart))
+			AnyView(ViewFactory.makeHomeView(cartManager: cart))
 		case .productDetail(let product):
-			AnyView(AppAssembler.makeProductDetailView(product: product, cartManager: cart))
+			AnyView(ViewFactory.makeProductDetailView(product: product, cartManager: cart))
 		case .cart:
-			AnyView(AppAssembler.makeCartView(cartManager: cart))
+			AnyView(ViewFactory.makeCartView(cartManager: cart))
 		}
 	}
 }

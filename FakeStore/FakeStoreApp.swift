@@ -14,7 +14,7 @@ struct FakeStoreApp: App {
 	
     var body: some Scene {
         WindowGroup {
-			AppAssembler.makeHomeView(cartManager: cartManager)
+			ViewFactory.makeHomeView(cartManager: cartManager)
 				.environmentObject(cartManager)
         }
     }

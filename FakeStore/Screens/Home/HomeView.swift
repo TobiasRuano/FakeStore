@@ -81,6 +81,6 @@ struct HomeView: View {
 }
 
 #Preview {
-	AppAssembler.makeHomeView(cartManager: CartManager())
+	ViewFactory.makeHomeView(cartManager: CartManager())
 		.environmentObject(CartManager())
 }
